@@ -1,0 +1,14 @@
+.hero p {
+    
+    position: relative;
+    z-index: 10;
+}
+h1 {
+    color: #000000;
+    position: relative;
+    z-index: 10;
+}
+
+html,body {
+    background-color: #2c4147;
+}
