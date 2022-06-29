@@ -159,7 +159,7 @@ The components in the `App.jsx` file should render the following components (alo
       - [ ] It should also define handler functions for:
         - [ ] `loginUser` - should make a request to log the user in
         - [ ] `signupUser` - should make a request to sign the user up
-        - [ ] `fetchUserFromToken` - should make a request to the `/auth/me` route to get the user's info
+        - [ ] `fetchUserFromToken` - should make a request to the `/auth/me` route to get the user's infos
         - [ ] `logoutUser` - this function should remove the `lifetracker_token` from local storage and refresh the page so that all user data is reset
       - [ ] Make sure to set all the state variables as the `value` prop passed to the `AuthContext.Provider` component
     - [ ] Create and export a `useAuthContext` hook that calls the `React.useContext` hook with the newly created `AuthContext` and returns it.
