@@ -8,15 +8,13 @@ Everywhere around us is data waiting to be collected and utilized. In recent yea
 
 This application will be built using the battle-tested PERN stack - PostgreSQL, Express, React, and Node.
 
-## Goals
-
 ## Week 4 - Part 1
 
 
 https://user-images.githubusercontent.com/99931474/176976617-ce74880a-b127-484b-9e3a-82cf5a4152db.mp4
 
 
-
+## Goals
 
 - [x] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
   - [x] If the user is logged in, it should display a **Sign Out** button. 
