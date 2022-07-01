@@ -1,9 +1,9 @@
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
-// const { PORT } = require("./config")
+const { PORT } = require("./config")
 const authRoutes = require("./routes/auth")
-const { BadRequestError, NotFoundError } = require("./utils/errors")
+const { NotFoundError, BadRequestError} = require("./utils/errors")
 const app = express()
 
 app.use(express.json())
@@ -30,7 +30,6 @@ app.use((req, res, next) => {
     })
 })
 
-const PORT = process.env.PORT || 3001
  
 app.listen(PORT, () => {
     console.log(`🚀 Server running http://localhost:${PORT}`)
