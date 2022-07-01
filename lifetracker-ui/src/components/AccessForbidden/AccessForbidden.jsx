@@ -5,10 +5,10 @@ import LoginForm from "../LoginForm/LoginForm"
 export default function AccessForbidden({setAppState}) {
     return (
         <nav className="access-forbidden">
-            <div className="card">Login</div>
+            <h2 className="access-login">Login</h2>
             <span className="error"> You must be logged in to access that page</span>
                 
-            <LoginForm setAppState={setAppState}/>
+            {/* <LoginForm setAppState={setAppState}/> */}
         </nav>
     )
 }

@@ -92,7 +92,7 @@ function RegistrationForm(props) {
 
   return (
     <div className="registration-form">
-
+      <h2 className="access-login">Register</h2>
       <div className="form-input">
         <label htmlFor="email">Email</label>
         <input
