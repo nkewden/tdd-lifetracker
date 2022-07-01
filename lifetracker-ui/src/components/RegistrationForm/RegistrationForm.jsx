@@ -1,8 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import "./RegistrationForm.css"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
-function RegistrationForm() {
+function RegistrationForm(props) {
+  const navigate = useNavigate()
   const [errors, setErrors] = useState({})
+  const [loading, setLoading] = useState(false)
   const [input, setInput] = useState({
     email: "",
     username: "",
@@ -43,6 +48,47 @@ function RegistrationForm() {
 
     setInput((f) => ({ ...f, [event.target.name]: event.target.value }));
   };
+
+
+  const handleOnSubmit = async () => {
+    setLoading(true)
+    setErrors((e) => ({ ...e, input: null }))
+
+    if (form.passwordConfirm !== form.password) {
+      setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
+      setLoading(false)
+      return
+    } else {
+      setErrors((e) => ({ ...e, passwordConfirm: null }))
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3001/auth/register", {
+        date: input.date,
+        location: input.location,
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+        password: input.password,
+      })
+
+      if (res?.data?.user) {
+        props.setAppState(res.data)
+        setLoading(false)
+        navigate("/portal")
+      } else {
+        setErrors((e) => ({ ...e, input: "Something went wrong with registration" }))
+        setLoading(false)
+      }
+    } catch (err) {
+      console.log(err)
+      const message = err?.response?.data?.error?.message
+      setErrors((e) => ({ ...e, input: message ? String(message) : String(err) }))
+      setLoading(false)
+    }
+  }
+
+
 
   return (
     <div className="registration-form">
@@ -109,6 +155,11 @@ function RegistrationForm() {
         )}
       </div>
       <button className="submit-registration">Create Account</button>
+      <div className="footer">
+        <p>
+          Already have an account? Login <Link className="footer-here" to="/login">here</Link>
+        </p>
+      </div>
     </div>
   );
 }

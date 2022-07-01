@@ -1,6 +1,7 @@
 a {
     color: #fff;
     font-weight: 300;
+    text-decoration: none;
 }
 .nav-links {
     display: flex;
@@ -14,3 +15,33 @@ a {
     grid-gap: 50px;
     gap: 50px;
 }
+.primary {
+    background: #5cee94;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .1s ease;
+    padding: 12px 18px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.ghost {
+    background: #bc00c9;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .1s ease;
+    padding: 12px 10px;
+    border-radius: 2px;
+    color: #fff;
+}
+

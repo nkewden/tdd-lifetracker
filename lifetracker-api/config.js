@@ -16,7 +16,7 @@ function getDatabaseUri() {
 
 const BCRYPT_WORK_FACTOR = 13
 
-console.log("lifetracker".red)
+console.log("lifetracker".green)
 console.log("PORT:".blue, PORT)
 console.log("Database URI:".blue, getDatabaseUri())
 console.log("---")

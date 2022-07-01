@@ -1,5 +1,6 @@
 import * as React from "react"
 import "./App.css"
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LandingPage from "../LandingPage/LandingPage"
 import LoginPage from "../LoginPage/LoginPage"
@@ -12,7 +13,7 @@ import Exercise from "../Exercise/Exercise"
 import Sleep from "../Sleep/Sleep"
 
 export default function App() {
-  const [appState, setAppState] = React.useState({})
+  const [appState, setAppState] = useState({})
 
   return (
     <div className="app">
@@ -23,7 +24,7 @@ export default function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage setAppState={setAppState}/>} />
             <Route path="/register" element={<RegistrationPage setAppState={setAppState}/>} />
-            <Route path="/activity" element={<ActivityPage />} setAppState={setAppState} appState={appState}  user={appState?.user} />
+            <Route path="/activity" element={<ActivityPage setAppState={setAppState} appState={appState}  user={appState?.user} />} />
             <Route path="/nutrition/*" element={<NutritionPage setAppState={setAppState} appState={appState}  user={appState?.user} />} />
             <Route path="/exercise/*" element={<Exercise setAppState={setAppState} appState={appState} user={appState?.user} />}/>
             <Route path="/sleep/*" element={<Sleep setAppState={setAppState} appState={appState} user={appState?.user} />}/>

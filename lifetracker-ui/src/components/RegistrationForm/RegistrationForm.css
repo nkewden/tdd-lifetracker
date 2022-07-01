@@ -1,0 +1,16 @@
+.form-input {
+    padding: 10px 0 20px 0;
+}
+
+.submit-registration {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background: #00c98e;
+}
