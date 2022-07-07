@@ -6,14 +6,15 @@ const { BCRYPT_WORK_FACTOR } = require("../config")
 
 class User {
 
-    // static makePublicUser(user) {
-    //     return {
-    //         id: user.id,
-    //         email: user.email,
-    //         first_name: user.first_name,
-    //         last_name: user.last_name,
-    //     }
-    // }
+    static async makePublicUser(user){
+        const users = {
+            id: user.id,
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name
+        }
+       return users; 
+    }
     
     static async login (credentials) {
         const requireFields = ["email", "password"]
@@ -27,7 +28,7 @@ class User {
         if (user) {
             const isValid = await bcrypt.compare(credentials.password, user.password)
             if (isValid) {
-                return user
+                return User.makePublicUser(user)
             }
         }
 

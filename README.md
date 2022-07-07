@@ -596,19 +596,19 @@ Here are the pieces of functionality that should be built out for the backend:
       - [x] Import the `bcrypt` package, the `db` client, and the app `config`.
       - [x] Implement the features outlined in the tests until they're all passing.
   - [x] Commit all work to `git`
-  - [ ] The **tokens** utility functions
-    - [ ] In the `utils` directory, create two new files: `utils/tokens.js` and `utils/tokens.test.js`
-      - [ ] At the bare minimum, two functions will be needed:
-        - [ ] One that accepts a JSON payload as an argument and converts it into a JWT
+  - [x] The **tokens** utility functions
+    - [x] In the `utils` directory, create two new files: `utils/tokens.js` and `utils/tokens.test.js`
+      - [x] At the bare minimum, two functions will be needed:
+        - [x] One that accepts a JSON payload as an argument and converts it into a JWT
         - [ ] One that accepts a JWT as an argument, validates it, and returns the JSON payload encoded within - if it's valid
     - [ ] In the `utils/tokens.test.js` file:
       - [ ] Write test cases for:
         - [ ] Can create valid JWT tokens for user payloads
         - [ ] Can extract a payload from a valid JWT with the correct secret
         - [ ] No payload gets returned when invalid tokens are parsed
-    - [ ] In the `utils/tokens.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-  - [ ] Commit all work to `git`
+    - [x] In the `utils/tokens.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+  - [x] Commit all work to `git`
   - [ ] The **security** middleware
     - [ ] In the `middleware` directory, create two new files: `middleware/security.js` and `middleware/security.test.js`
       - [ ] One middleware will be responsible for extracting a user from a valid JWT in the request:
