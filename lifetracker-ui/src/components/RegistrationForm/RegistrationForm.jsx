@@ -154,7 +154,7 @@ function RegistrationForm(props) {
           <span className="error">{errors.passwordConfirm}</span>
         )}
       </div>
-      <button className="submit-registration">Create Account</button>
+      <button className="submit-registration" disabled={loading} onClick={handleOnSubmit}>{loading ? "loading..." : "Create Account"}</button>
       <div className="footer">
         <p>
           Already have an account? Login <Link className="footer-here" to="/login">here</Link>

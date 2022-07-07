@@ -674,7 +674,7 @@ Here are the pieces of functionality that should be built out for the backend:
   - [ ] The **Nutrition** model
     - [ ] In the `models` directory, create two new files: `models/nutrition.js` and `models/nutrition.test.js`
       - [ ] The `Nutrition` model should have **at least** the following static methods:
-        - [ ] `createNutrition`
+        - [x] `createNutrition`
           - [ ] Should insert a new nutrition instance into the database when values are supplied for all of the required fields: `"name"`, `"category"`, `"calories"`, and `"image_url"`. The `quantity` field should default to `1`.
           - [ ] The new nutrition instance should have its `user_id` field set to the `id` of the authenticated user
           - [ ] Should throw a `BadRequestError` (`400` status code) or `UnprocessableEntityError` (`422` status code) when any of those values are not supplied.

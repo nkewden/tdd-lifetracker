@@ -13,6 +13,7 @@ CREATE TABLE nutrition (
 id          SERIAL PRIMARY KEY,
 name        TEXT NOT NULL,
 category    TEXT NOT NULL,
+quantity    INTEGER NOT NULL DEFAULT 1,
 calories    INTEGER NOT NULL,
 image_url   TEXT NOT NULL,
 user_id     INTEGER NOT NULL,

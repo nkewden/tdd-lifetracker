@@ -10,8 +10,10 @@ class User {
         return {
             id: user.id,
             email: user.email,
+            username: user.username,
             first_name: user.first_name,
-            last_name: user.last_name
+            last_name: user.last_name,
+            create_at: user.create_at
         }
     }
     
@@ -61,12 +63,12 @@ class User {
                 
             )
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING id, email, username, updated_at, created_at;
+            RETURNING id, email, username, first_name, last_name, updated_at, created_at;
         `, [lowercasedEmail, hashedPassword, credentials.username, credentials.first_name, credentials.last_name])
 
         const user = result.rows[0]
 
-        return user
+        return User.makePublicUser(user)
     }
 
     static async fetchUserByEmail(email) {
