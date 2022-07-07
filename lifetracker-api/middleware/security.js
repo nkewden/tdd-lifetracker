@@ -21,7 +21,6 @@ const jwtFrom = ({ headers }) => {
   
       return next()
     } catch (err) {
-      console.log(err)
       return next()
     }
   }
@@ -29,7 +28,7 @@ const jwtFrom = ({ headers }) => {
   const requireAuthenticatedUser = (req, res, next) => {
     try {
       const { user } = res.locals
-      if (!user?.username) throw new UnauthorizedError()
+      if (!user?.email) throw new UnauthorizedError()
       return next()
     } catch (error) {
       return next(error)
@@ -37,7 +36,6 @@ const jwtFrom = ({ headers }) => {
   }
   
   module.exports = {
-    jwtFrom,
     extractUserFromJwt,
     requireAuthenticatedUser,
   }

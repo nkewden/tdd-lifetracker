@@ -15,9 +15,9 @@ app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
 
-app.get("/", async(req, res, next) => {
-    res.status(200).json({ ping: "pong"})
-})
+// app.get("/", async(req, res, next) => {
+//     res.status(200).json({ ping: "pong"})
+// })
 
 app.use((req, res, next) => {
     return next(new NotFoundError())
