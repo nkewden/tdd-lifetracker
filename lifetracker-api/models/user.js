@@ -37,7 +37,7 @@ class User {
     }
 
     static async register (credentials) {
-        const requireFields = ["email", "username", "firstname", "lastname", "password", "confirmPassword"]
+        const requireFields = ["email", "username", "first_name", "last_name", "password", "confirmPassword"]
         requireFields.forEach((field) => {
             if (!credentials.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body`)
@@ -60,14 +60,14 @@ class User {
             INSERT INTO users (
                 email,
                 password,
-                firstname,
+                first_name,
                 lastname,
                 username
                 
             )
             VALUES ($1, $2, $3, $4, $5)
             RETURNING id, email, username, updated_at, created_at;
-        `, [lowercasedEmail, hashedPassword, credentials.username, credentials.firstname, credentials.lastname])
+        `, [lowercasedEmail, hashedPassword, credentials.username, credentials.first_name, credentials.last_name])
 
         const user = result.rows[0]
 
@@ -75,7 +75,7 @@ class User {
     }
 
     static async fetchUserByEmail(email) {
-        if (!email) {
+        if (!email) {  
             throw new BadRequestError("No email provided")
         }
 
