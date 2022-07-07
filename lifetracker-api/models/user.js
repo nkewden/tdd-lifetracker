@@ -6,14 +6,14 @@ const { BCRYPT_WORK_FACTOR } = require("../config")
 
 class User {
 
-    static makePublicUser(user) {
-        return {
-            id: user.id,
-            email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-        }
-    }
+    // static makePublicUser(user) {
+    //     return {
+    //         id: user.id,
+    //         email: user.email,
+    //         first_name: user.first_name,
+    //         last_name: user.last_name,
+    //     }
+    // }
     
     static async login (credentials) {
         const requireFields = ["email", "password"]
@@ -27,7 +27,7 @@ class User {
         if (user) {
             const isValid = await bcrypt.compare(credentials.password, user.password)
             if (isValid) {
-                return User.makePublicUser(user)
+                return user
             }
         }
 
@@ -35,16 +35,12 @@ class User {
     }
 
     static async register (credentials) {
-        const requireFields = ["email", "username", "first_name", "last_name", "password"]
+        const requireFields = ["email", "username", "first_name", "last_name", "password", "confirmPassword"]
         requireFields.forEach((field) => {
             if (!credentials?.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body`)
             }
         }) 
-
-        if (credentials.email.indexOf("@") <= 0) {
-            throw new BadRequestError("Invalid email.")
-        }
 
         const existingUser = await User.fetchUserByEmail(credentials.email)
         if (existingUser) {
@@ -55,26 +51,22 @@ class User {
         const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
         const lowercasedEmail = credentials.email.toLowerCase()
 
-        if (existingUser) {
-            throw new BadRequestError(`Duplicate email: ${credentials.email}`)
-        }
-
         const result = await db.query(`
             INSERT INTO users (
                 email,
-                username,
+                password,
                 first_name,
                 last_name,
-                password,
+                username
                 
             )
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING id, email, username, password, first_name, last_name, updated_at;
-        `, [lowercasedEmail, credentials.first_name, credentials.last_name, hashedPassword])
+            RETURNING id, email, username, updated_at, created_at;
+        `, [lowercasedEmail, hashedPassword, credentials.username, credentials.first_name, credentials.last_name])
 
         const user = result.rows[0]
 
-        return User.makePublicUser(user)
+        return user
     }
 
     static async fetchUserByEmail(email) {
