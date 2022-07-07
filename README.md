@@ -463,16 +463,16 @@ Here are the pieces of functionality that should be built out for the backend:
   - [x] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
   - [x] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
   - [x] Commit all work to `git`
-  - [ ] Add a `.env` file to the root of the repo and include the following environment variables
-    - [ ] `PORT` (default to `3001`)
-    - [ ] `SECRET_KEY` (set to a long random string)
-    - [ ] `BCRYPT_WORK_FACTOR` (set to `13`)
-    - [ ] `DATABASE_USER`
-    - [ ] `DATABASE_PASS`
-    - [ ] `DATABASE_HOST`
-    - [ ] `DATABASE_PORT`
-    - [ ] `DATABASE_NAME` - (set to `lifetracker`)
-    - [ ] `DATABASE_TEST_NAME` - (set to `lifetracker_test`)
+  - [x] Add a `.env` file to the root of the repo and include the following environment variables
+    - [x] `PORT` (default to `3001`)
+    - [x] `SECRET_KEY` (set to a long random string)
+    - [x] `BCRYPT_WORK_FACTOR` (set to `13`)
+    - [x] `DATABASE_USER`
+    - [x] `DATABASE_PASS`
+    - [x] `DATABASE_HOST`
+    - [x] `DATABASE_PORT`
+    - [x] `DATABASE_NAME` - (set to `lifetracker`)
+    - [x] `DATABASE_TEST_NAME` - (set to `lifetracker_test`)
   - [ ] Add a `config.test.js` file
     - [ ] Write tests that check to make sure that:
       - [ ] `process.env.NODE_ENV` is set to `test` when the test suite is run
@@ -487,12 +487,12 @@ Here are the pieces of functionality that should be built out for the backend:
         - [ ] Check to see if a valid `process.env.DATABASE_URL` environment variable exists, and return that if it does.
         - [ ] When `IS_TESTING` is `true`, the `getDatabaseUri` function should use the test database
         - [ ] Otherwise, it should combine the proper database environment variables into a database connection string if no `process.env.DATABASE_URL` environment variable exists
-  - [ ] Add a `config.js` file
-    - [ ] Use the `dotenv` package to parse the environment variables from the `.env` file.
-    - [ ] Export each of the environment variables from the `config.js` file until the tests pass
-    - [ ] Write a `getDatabaseUri` function so that all the tests pass
-  - [ ] Commit all work to `git`
-  - [ ] The project should now be ready to go!
+  - [x] Add a `config.js` file
+    - [x] Use the `dotenv` package to parse the environment variables from the `.env` file.
+    - [x] Export each of the environment variables from the `config.js` file until the tests pass
+    - [x] Write a `getDatabaseUri` function so that all the tests pass
+  - [x] Commit all work to `git`
+  - [x] The project should now be ready to go!
 - **PostgreSQL database**
   - Time bring in a PostgreSQL database client as the application's persistence layer
   - Make sure the PostgreSQL server is running
@@ -533,9 +533,9 @@ Here are the pieces of functionality that should be built out for the backend:
   - [x] A database client is now ready to be used!
 - **Server**
   - [x] Build out a bare-bones Express server with a healthcheck route and an adequate middleware pipeline.
-  - [ ] Create a `utils` directory
-    - [ ] In the `utils` directory, create an `errors.js` file.
-    - [ ] Create error classes inside the file that will be used throughout the app.
+  - [x] Create a `utils` directory
+    - [x] In the `utils` directory, create an `errors.js` file.
+    - [x] Create error classes inside the file that will be used throughout the app.
   - [ ] In the `app.test.js` file, write tests that:
     - [ ] Ensure that the Express application responds to `GET` requests to the `/` route with a JSON object of `{ "ping": "pong" }`
     - [ ] Check that middleware like `morgan` and `cors` exist, along with the JSON `body-parser` middleware from `express`
@@ -550,12 +550,12 @@ Here are the pieces of functionality that should be built out for the backend:
   - [ ] Test out the fancy new Express server by starting it up in a new terminal window!
 - **Common Test Configuration**
   - [ ] It would probably be helpful to create some common test functions that can be used throughout the application's testing suite.
-  - [ ] Create a new directory called `tests`
-  - [ ] Now, touch a new file at `tests/common.js`
-    - [ ] In that file:
-      - [ ] Import the `db` client
-      - [ ] Create and export four functions:
-        - [ ] `commonBeforeAll`
+  - [x] Create a new directory called `tests`
+  - [x] Now, touch a new file at `tests/common.js`
+    - [x] In that file:
+      - [x] Import the `db` client
+      - [x] Create and export four functions:
+        - [] `commonBeforeAll`
           - [ ] Actions that should happen before any tests in a particular file run.
           - [ ] This should include things like executing queries that delete all items from any tables in the test database that might have been added during testing
         - [ ] `commonBeforeEach`
