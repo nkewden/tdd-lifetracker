@@ -457,11 +457,11 @@ Note that when developing the backend, SITE interns will be asked to write tests
 Here are the pieces of functionality that should be built out for the backend:
 
 - **Project setup**
-  - [ ] First things first, bootstrap the Express application with some essential files and starter code
-  - [ ] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
-  - [ ] Make sure `node_modules` are added to the `.gitignore` file.
-  - [ ] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
-  - [ ] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
+  - [x] First things first, bootstrap the Express application with some essential files and starter code
+  - [x] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
+  - [x] Make sure `node_modules` are added to the `.gitignore` file.
+  - [x] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
+  - [x] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
   - [ ] Commit all work to `git`
   - [ ] Add a `.env` file to the root of the repo and include the following environment variables
     - [ ] `PORT` (default to `3001`)
@@ -529,10 +529,10 @@ Here are the pieces of functionality that should be built out for the backend:
     - [x] Initialize a new postgres client with the `pg` package and connect to PostgreSQL using any necessary config variables.
     - [x] Connect to postgres and log a message to the terminal on success or failure.
     - [x] Export the connected database client
-  - [ ] Commit all work to `git`
-  - [ ] A database client is now ready to be used!
+  - [x] Commit all work to `git`
+  - [x] A database client is now ready to be used!
 - **Server**
-  - [ ] Build out a bare-bones Express server with a healthcheck route and an adequate middleware pipeline.
+  - [x] Build out a bare-bones Express server with a healthcheck route and an adequate middleware pipeline.
   - [ ] Create a `utils` directory
     - [ ] In the `utils` directory, create an `errors.js` file.
     - [ ] Create error classes inside the file that will be used throughout the app.
