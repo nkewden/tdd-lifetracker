@@ -3,11 +3,15 @@ const cors = require("cors")
 const morgan = require("morgan")
 const authRoutes = require("./routes/auth")
 const { NotFoundError, BadRequestError} = require("./utils/errors")
+const security = require("./middleware/security")
 const app = express()
+
 
 app.use(express.json())
 app.use(cors())
 app.use(morgan("tiny"))
+
+app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
 
