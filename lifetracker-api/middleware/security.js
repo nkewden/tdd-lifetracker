@@ -18,7 +18,6 @@ const jwtFrom = ({ headers }) => {
       if (token) {
         res.locals.user = jwt.verify(token, SECRET_KEY)
       }
-  
       return next()
     } catch (err) {
       return next()
@@ -28,7 +27,9 @@ const jwtFrom = ({ headers }) => {
   const requireAuthenticatedUser = (req, res, next) => {
     try {
       const { user } = res.locals
-      if (!user?.email) throw new UnauthorizedError()
+      if (!user?.email){
+        throw new UnauthorizedError()
+      }
       return next()
     } catch (error) {
       return next(error)
