@@ -699,9 +699,9 @@ Here are the pieces of functionality that should be built out for the backend:
       - [ ] Implement the features outlined in the tests until they're all passing
     - [ ] Commit all work to `git`
   - [x] The **permissions** middleware
-    - [ ] In the `middleware` directory, create two new files: `middleware/permissions.js` and `middleware/permissions.test.js`
-      - [ ] Though more functions will need to be added here as the number of resources grows, for now only 1 function needs to be created.
-      - [ ] The `authedUserOwnsNutrition` middleware function should:
+    - [x] In the `middleware` directory, create two new files: `middleware/permissions.js` and `middleware/permissions.test.js`
+      - [x] Though more functions will need to be added here as the number of resources grows, for now only 1 function needs to be created.
+      - [x] The `authedUserOwnsNutrition` middleware function should:
         - [ ] Probably be called after the `requireAuthenticatedUser` security middleware in any route's middleware pipeline
         - [ ] Extract a parameter from the request endpoint that corresponds to the `id` of the nutrition instance
         - [ ] Query the database for that nutrition instance
