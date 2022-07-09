@@ -13,6 +13,11 @@ This application will be built using the battle-tested PERN stack - PostgreSQL, 
 
 https://user-images.githubusercontent.com/99931474/176976617-ce74880a-b127-484b-9e3a-82cf5a4152db.mp4
 
+## Week 5 - Part 2
+
+
+https://user-images.githubusercontent.com/99931474/178084292-50c032ed-4e03-4675-80d1-d990d95d18eb.mp4
+
 
 ## Goals
 
@@ -26,15 +31,13 @@ https://user-images.githubusercontent.com/99931474/176976617-ce74880a-b127-484b-
 - [x] When a user first authenticates, they should be redirected to an authenticated view (i.e the detailed activity page). When they sign out, all frontend data should be reset.
 - [ ] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
 - [x] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves. 
-- [ ] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
+- [x] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
 - [ ] Deployed website with Heroku & Surge. 
 
 **Detailed Activity Page:**
 - [ ] The detailed activity page should display a feed of all previous tracked activities.
 - [ ] The detailed activity should contain a form to contain relevant information. (i.e if tracking nutrition this form allows the user to capture calories, timestamp, image, category, etc.) 
-- [ ] The activity tracked should be given a unique id for easy lookup.
-  `TODO://` Add link to table schema in the link code below. Your file should end in `.sql` and show your schema for the detailed activities table. (🚫 Remove this paragraph after adding schema link)
-  * [Table Schema](📝ADD LINK TO TABLE SCHEMA.sql HERE!) 
+- [x] The activity tracked should be given a unique id for easy lookup.
 
 
 ## Application Features
