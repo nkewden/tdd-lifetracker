@@ -11,6 +11,17 @@ import NotFound from "../NotFound/NotFound"
 import Navbar from "../Navbar/Navbar"
 import apiClient from "../../services/apiClient";
 import AccessForbidden from "../AccessForbidden/AccessForbidden";
+import NutritionForm from "../NutritionForm/NutritionForm";
+// import {authContextProver, useAuthContext} from "../../contexts/auth"
+
+// export default function AppContainer() {
+//   return (
+//     <AuthContextProvider>
+//         <App />
+//     </AuthContextProvider>
+//   )
+// }
+
 
 export default function App() {
   const [user, setUser] = useState({})
@@ -47,7 +58,8 @@ export default function App() {
             <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
             <Route path="/register" element={<RegistrationPage user={user} setUser={setUser}/>} />
             <Route path="/activity" element={user?.email ? (<ActivityPage/>) : (<AccessForbidden/>)}/>
-            <Route path="/nutrition/*" element={user?.email ? (<NutritionPage user={user}/>) : (<AccessForbidden/>)}/>
+            <Route path="/nutrition/" element={user?.email ? (<NutritionPage user={user}/>) : (<AccessForbidden/>)}/>
+            <Route path="/nutrition/create" element={<NutritionForm user={user} setUser={setUser}/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

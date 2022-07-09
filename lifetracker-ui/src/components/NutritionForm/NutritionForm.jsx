@@ -84,7 +84,7 @@ const handleSubmit = async (e) => {
 
         <div className="input-field">
             <label>Image Url</label>
-            <input className="form-input" type="url" name="imageUrl"
+            <input className="form-input" type="url" name="image_url"
                             placeholder="http://www.food-image.com/1"
                             value={form.image_url}
                             onChange={handleOnInputChange}/>

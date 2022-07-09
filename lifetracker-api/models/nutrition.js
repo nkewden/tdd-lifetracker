@@ -1,5 +1,6 @@
 const db = require("../db");
 const { BadRequestError} = require("../utils/errors");
+const User = require("../models/user")
 
 class Nutrition {
     static async createNutrition({user, post}) {
@@ -9,11 +10,16 @@ class Nutrition {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
             }
         })
-        console.log(user.email)
+
+
+        const user_id = await User.fetchUserByEmail(user.email)
+
+
+        
         const result = await db.query(
             
             `INSERT INTO nutrition (user_id, name, category, quantity, calories, image_url)
-            VALUES ((SELECT id FROM users WHERE email = $1), $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING id,
                     user_id AS "userId",
                     name,
@@ -23,7 +29,7 @@ class Nutrition {
                     image_url AS "imageUrl",
                     created_at AS "createdAt"`
             , 
-            [user.email, post.name, post.category, post.quantity, post.calories, post.image_url]
+            [user_id.id, post.name, post.category, post.quantity, post.calories, post.image_url]
         )
         return result.rows[0]
     }
@@ -57,24 +63,34 @@ class Nutrition {
         return nutrition
     }
 
-    static async listNutritionForUser(){
-        const query = `
-        SELECT 
-        n.id,
-        n.name,
-        n.category,
-        n.calories,
-        n.image_url,
-        n.user_id,
-        n.created_at,
-        n.quantity,
-        u.email
-        
-        FROM nutrition AS n
-            LEFT JOIN users AS u ON u.id = n.user_id
-        ORDER by n.created_at DESC`
 
-        const result = await db.query(query)
+
+    static async listNutritionForUser(user){
+        const user_id = await User.fetchUserByEmail(user.email)
+
+        const query = `
+        SELECT * FROM nutrition 
+        WHERE user_id = $1
+        `
+
+
+        // const query = `
+        // SELECT 
+        // n.id,
+        // n.name,
+        // n.category,
+        // n.calories,
+        // n.image_url,
+        // n.user_id,
+        // n.created_at,
+        // n.quantity,
+        // u.email
+        
+        // FROM nutrition AS n
+        //     LEFT JOIN users AS u ON u.id = n.user_id
+        // ORDER by n.created_at DESC`
+
+        const result = await db.query(query, [user_id.id])
 
         if(!result){
             throw new NotFoundError

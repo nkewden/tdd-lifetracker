@@ -7,7 +7,8 @@ const security = require("../middleware/security")
 
 router.get("/", security.requireAuthenticatedUser, async(req, res, next) => {
     try{
-        const nutrition = await Nutrition.listNutritionForUser()
+        const { user } = res.locals
+        const nutrition = await Nutrition.listNutritionForUser(user)
         return res.status(200).json({nutrition})
     }catch(err){
         next(err)
