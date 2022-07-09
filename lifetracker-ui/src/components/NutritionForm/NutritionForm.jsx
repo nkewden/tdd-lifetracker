@@ -42,7 +42,7 @@ const handleSubmit = async (e) => {
 
     const {data, err} = await apiClient.createNutrition({name: form.name,
                 calories: form.calories,
-                imageUrl: form.image_url,
+                image_url: form.image_url,
                 category: form.category,
                 quantity: form.quantity})
 
@@ -51,7 +51,7 @@ const handleSubmit = async (e) => {
         setForm({
                 name: "",
                 calories: 1,
-                imageUrl: "",
+                image_url: "",
                 category: "",
                 quantity: 1
             })
@@ -86,7 +86,7 @@ const handleSubmit = async (e) => {
             <label>Image Url</label>
             <input className="form-input" type="url" name="imageUrl"
                             placeholder="http://www.food-image.com/1"
-                            value={form.imageUrl}
+                            value={form.image_url}
                             onChange={handleOnInputChange}/>
         </div>
 
