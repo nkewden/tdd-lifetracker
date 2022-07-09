@@ -1,51 +1,52 @@
 const db = require("../db");
-const { BadRequestError, NotFoundError} = require("../utils/errors");
+const { BadRequestError} = require("../utils/errors");
 
 class Nutrition {
-    static async createNutrition({data, user}){
-        const requiredFields = ["name", "category", "calories", "imageUrl", "quantity"]
+    static async createNutrition({user, post}) {
+        const requiredFields = ["name", "category", "calories", "image_url","quantity"]
         requiredFields.forEach(field => {
-            if (!data.hasOwnProperty(field)){
-                throw new BadRequestError(`Missing ${field} in request body.`)
+            if (!post.hasOwnProperty(field)) {
+                throw new BadRequestError(`Required field - ${field} - missing from request body.`)
             }
         })
-
-        const result = await db.query(`INSERT INTO nutrition (
-            name,
-            category,
-            calories,
-            image_url,
-            quantity,
-            user_id
+        console.log(user.email)
+        const result = await db.query(
+            
+            `INSERT INTO nutrition (user_id, name, category, quantity, calories, image_url)
+            VALUES ((SELECT id FROM users WHERE email = $1), $2, $3, $4, $5, $6)
+            RETURNING id,
+                    user_id AS "userId",
+                    name,
+                    category,
+                    quantity,
+                    calories,
+                    image_url AS "imageUrl",
+                    created_at AS "createdAt"`
+            , 
+            [user.email, post.name, post.category, post.quantity, post.calories, post.image_url]
         )
-        VALUES ($1, $2, $3, $4, $5, (SELECT id FROM users WHERE email = $6))
-        RETURNING id, name, category, calories, created_at, image_url, user_id, quantity;
-        `, [data.name, data.category, data.calories, data.imageUrl, user.email, data.quantity])
-
-        const nutritionData = result.rows[0]
-
-        return nutritionData
+        return result.rows[0]
     }
 
     static async fetchNutritionById(id){
         if(!id) {
             throw new BadRequestError("Please provide ID")
         }
-        const query = `
-        SELECT 
-        nutri.id,
-        nutri.name,
-        nutri.category,
-        nutri.calories,
-        nutri.image_url,
-        nutri.user_id,
-        nutri.created_at,
-        nutri.quantity,
-        user.email
+        const query = ( `SELECT 
+            n.id,
+            n.name,
+            n.category,
+            n.calories,
+            n.image_url,
+            n.user_id,
+            n.created_at,
+            n.quantity,
+            u.email
+            
+            FROM nutrition AS n
+                LEFT JOIN users AS u ON u.id = n.user_id
+            WHERE n.id = $1`)
         
-        FROM nutrition AS nutri
-            LEFT JOIN users AS user ON user.id = nutri.user_id
-        WHERE nutri.id = $1`
 
         const result = await db.query(query, [id])
 
@@ -56,27 +57,24 @@ class Nutrition {
         return nutrition
     }
 
-    static async listNutritionForUser(user){
-        if(!user) {
-            throw new BadRequestError("Please provide ID")
-        }
+    static async listNutritionForUser(){
         const query = `
         SELECT 
-        nutri.id,
-        nutri.name,
-        nutri.category,
-        nutri.calories,
-        nutri.image_url,
-        nutri.user_id,
-        nutri.created_at,
-        nutri.quantity,
-        user.email
+        n.id,
+        n.name,
+        n.category,
+        n.calories,
+        n.image_url,
+        n.user_id,
+        n.created_at,
+        n.quantity,
+        u.email
         
-        FROM nutrition AS nutri
-            LEFT JOIN users AS user ON user.id = nutri.user_id
-        WHERE nutri.id = $1`
+        FROM nutrition AS n
+            LEFT JOIN users AS u ON u.id = n.user_id
+        ORDER by n.created_at DESC`
 
-        const result = await db.query(query, [user.email])
+        const result = await db.query(query)
 
         if(!result){
             throw new NotFoundError

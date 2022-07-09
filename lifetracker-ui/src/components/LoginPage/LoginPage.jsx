@@ -5,7 +5,7 @@ import "./LoginPage.css"
 function LoginPage(props) {
   return (
     <div className="login-page">
-      <LoginForm setAppState={props.setAppState}/>
+      <LoginForm user={props.user} setUser={props.setUser}/>
     </div>
   )
 }

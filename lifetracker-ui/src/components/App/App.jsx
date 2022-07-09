@@ -1,6 +1,6 @@
 import * as React from "react"
 import "./App.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LandingPage from "../LandingPage/LandingPage"
 import LoginPage from "../LoginPage/LoginPage"
@@ -9,25 +9,45 @@ import ActivityPage from "../ActivityPage/ActivityPage"
 import NutritionPage from "../NutritionPage/NutritionPage"
 import NotFound from "../NotFound/NotFound"
 import Navbar from "../Navbar/Navbar"
-import Exercise from "../Exercise/Exercise"
-import Sleep from "../Sleep/Sleep"
+import apiClient from "../../services/apiClient";
+import AccessForbidden from "../AccessForbidden/AccessForbidden";
 
 export default function App() {
-  const [appState, setAppState] = useState({})
+  const [user, setUser] = useState({})
+  const [error, setError] = useState()
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data, err } = await apiClient.fetchUserFromToken()
+      if (data) setUser(data.user)
+      if(error) setError(err)
+
+    }
+
+    const token = localStorage.getItem("lifetracker_token")
+    if (token) {
+      apiClient.setToken(token)
+      fetchUser()
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    await apiClient.logoutUser()
+    setUser({})
+    setError(null)
+  }
 
   return (
     <div className="app">
       <React.Fragment>
         <BrowserRouter>
-        <Navbar />
+        <Navbar user={user} setUser={setUser} handleLogout={handleLogout}/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage setAppState={setAppState}/>} />
-            <Route path="/register" element={<RegistrationPage setAppState={setAppState}/>} />
-            <Route path="/activity" element={<ActivityPage setAppState={setAppState} appState={appState}  user={appState?.user} />} />
-            <Route path="/nutrition/*" element={<NutritionPage setAppState={setAppState} appState={appState}  user={appState?.user} />} />
-            <Route path="/exercise/*" element={<Exercise setAppState={setAppState} appState={appState} user={appState?.user} />}/>
-            <Route path="/sleep/*" element={<Sleep setAppState={setAppState} appState={appState} user={appState?.user} />}/>
+            <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
+            <Route path="/register" element={<RegistrationPage user={user} setUser={setUser}/>} />
+            <Route path="/activity" element={user?.email ? (<ActivityPage/>) : (<AccessForbidden/>)}/>
+            <Route path="/nutrition/*" element={user?.email ? (<NutritionPage user={user}/>) : (<AccessForbidden/>)}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

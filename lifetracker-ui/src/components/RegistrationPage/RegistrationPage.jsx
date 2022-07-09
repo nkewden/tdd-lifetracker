@@ -2,10 +2,10 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm'
 import React from 'react'
 import "./RegistrationPage.css"
 
-function RegistrationPage() {
+function RegistrationPage(props) {
   return (
     <div className="registration-page">
-      <RegistrationForm />
+      <RegistrationForm user={props.user} setUser={props.setUser}/>
     </div>
   )
 }

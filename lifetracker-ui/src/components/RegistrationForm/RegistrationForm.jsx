@@ -1,14 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./RegistrationForm.css"
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import apiClient from "../../services/apiClient"
 
-function RegistrationForm(props) {
+function RegistrationForm({ user, setUser }) {
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
-  const [loading, setLoading] = useState(false)
-  const [input, setInput] = useState({
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [form, setForm] = useState({
     email: "",
     username: "",
     firstName: "",
@@ -17,75 +17,51 @@ function RegistrationForm(props) {
     passwordConfirm: "",
   });
 
-  const handler = (event) => {
-    if (event.target.name === "password") {
-      if (input.passwordConfirm && input.passwordConfirm !== event.target.value) {
-        setErrors((e) => ({
-          ...e,
-          passwordConfirm: "Password's do not match",
-        }));
-      } else {
-        setErrors((e) => ({ ...e, passwordConfirm: null }));
-      }
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/")
     }
-    if (event.target.name === "passwordConfirm") {
-      if (input.password && input.password !== event.target.value) {
-        setErrors((e) => ({
-          ...e,
-          passwordConfirm: "Password's do not match",
-        }));
-      } else {
-        setErrors((e) => ({ ...e, passwordConfirm: null }));
-      }
-    }
+  }, [user, navigate])
+
+  const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
       if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
       } else {
-        setErrors((e) => ({ ...e, email: null }));
+        setErrors((e) => ({ ...e, email: null }))
       }
     }
 
-    setInput((f) => ({ ...f, [event.target.name]: event.target.value }));
-  };
+    if (event.target.name === "passwordConfirm") {
+      if (event.target.value !== form.password) {
+        setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
+      } else {
+        setErrors((e) => ({ ...e, passwordConfirm: null }))
+      }
+    }
 
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+  }
 
   const handleOnSubmit = async () => {
-    setLoading(true)
-    setErrors((e) => ({ ...e, input: null }))
+    setIsProcessing(true)
+    setErrors((e) => ({ ...e, form: null }))
 
     if (form.passwordConfirm !== form.password) {
       setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
-      setLoading(false)
+      setIsProcessing(false)
       return
     } else {
       setErrors((e) => ({ ...e, passwordConfirm: null }))
     }
 
-    try {
-      const res = await axios.post("http://localhost:3001/auth/register", {
-        date: input.date,
-        location: input.location,
-        firstName: input.firstName,
-        lastName: input.lastName,
-        email: input.email,
-        password: input.password,
-      })
-
-      if (res?.data?.user) {
-        props.setAppState(res.data)
-        setLoading(false)
-        navigate("/portal")
-      } else {
-        setErrors((e) => ({ ...e, input: "Something went wrong with registration" }))
-        setLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
-      const message = err?.response?.data?.error?.message
-      setErrors((e) => ({ ...e, input: message ? String(message) : String(err) }))
-      setLoading(false)
+    const {data, error} = await apiClient.signupUser({email: form.email, userName: form.userName, firstName: form.firstName, lastName: form.lastName, password: form.password})
+    if (error) setErrors((e) => ({ ...e, form: error }))
+    if (data?.user) {
+      setUser(data.user)
+      apiClient.setToken(data.token)
     }
+    setIsProcessing(false)
   }
 
 
@@ -98,11 +74,23 @@ function RegistrationForm(props) {
         <input
           type="email"
           name="email"
-          placeholder="Nas@gmail.com"
-          value={input.email}
-          onChange={handler}
+          placeholder="Nasradin@gmail.com"
+          value={form.email}
+          onChange={handleOnInputChange }
         />
         {errors.email && <span className="error">{errors.email}</span>}
+      </div>
+
+      <div className="form-input">
+        <label htmlFor="name">Username</label>
+        <input
+          type="text"
+          name="userName"
+          placeholder="Nasradin"
+          value={form.userName}
+          onChange={handleOnInputChange}
+        />
+        {errors.userName && <span className="error">{errors.userName}</span>}
       </div>
 
       <div className="form-input">
@@ -111,8 +99,8 @@ function RegistrationForm(props) {
           type="text"
           name="firstName"
           placeholder="Nasradin"
-          value={input.firstName}
-          onChange={handler}
+          value={form.firstName}
+          onChange={handleOnInputChange }
         />
         {errors.firstName && <span className="error">{errors.firstName}</span>}
       </div>
@@ -123,8 +111,8 @@ function RegistrationForm(props) {
           type="text"
           name="lastName"
           placeholder="Kewden"
-          value={input.lastName}
-          onChange={handler}
+          value={form.lastName}
+          onChange={handleOnInputChange }
         />
         {errors.lastName && <span className="error">{errors.lastName}</span>}
       </div>
@@ -135,8 +123,8 @@ function RegistrationForm(props) {
           type="password"
           name="password"
           placeholder="Password"
-          value={input.password}
-          onChange={handler}
+          value={form.password}
+          onChange={handleOnInputChange }
         />
         {errors.password && <span className="error">{errors.password}</span>}
       </div>
@@ -147,14 +135,14 @@ function RegistrationForm(props) {
           type="password"
           name="passwordConfirm"
           placeholder="Confirm Password"
-          value={input.passwordConfirm}
-          onChange={handler}
+          value={form.passwordConfirm}
+          onChange={handleOnInputChange }
         />
         {errors.passwordConfirm && (
           <span className="error">{errors.passwordConfirm}</span>
         )}
       </div>
-      <button className="submit-registration" disabled={loading} onClick={handleOnSubmit}>{loading ? "loading..." : "Create Account"}</button>
+      <button className="submit-registration" disabled={isProcessing} onClick={handleOnSubmit}>{isProcessing ? "loading..." : "Create Account"}</button>
       <div className="footer">
         <p>
           Already have an account? Login <Link className="footer-here" to="/login">here</Link>

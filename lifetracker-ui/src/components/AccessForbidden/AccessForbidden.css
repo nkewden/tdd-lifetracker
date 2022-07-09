@@ -1,7 +1,10 @@
-.error {
-    color: red;
+.access-forbidden {
+    margin: auto;
+    width: 50%;
+    border: 3px solid ;
+    padding: 10px;
 }
 
-.access-login {
-    color: white;
+.error {
+    color: red;
 }

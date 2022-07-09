@@ -1,50 +1,45 @@
 import React from "react";
 import "./LoginForm.css";
-import { useState } from "react";
-import { Link} from "react-router-dom"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom"
+import apiClient from "../../services/apiClient"
 
-function LoginForm(props) {
+function LoginForm({ user, setUser }) {
   const navigate = useNavigate()
   const [errors, setErrors] = useState({});
-  const [input, setInput] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handler = (evt) => {
-    if (evt.target.name === "email") {
-      if (evt.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/")
+    }
+  }, [user, navigate])
+
+  const handleOnInputChange = (event) => {
+    if (event.target.name === "email") {
+      if (event.target.value.indexOf("@") === -1) {
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
       } else {
-        setErrors((e) => ({ ...e, email: null }));
+        setErrors((e) => ({ ...e, email: null }))
       }
     }
 
-    setInput((f) => ({ ...f, [evt.target.name]: evt.target.value }));
-  };
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+  }
 
+  const handleOnSubmit = async () => {
+    setIsProcessing(true)
+    setErrors((e) => ({ ...e, form: null }))
 
-  const handleOnSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setErrors((e) => ({ ...e, input: null }))
-
-    try {
-      const res = await axios.post(`http://localhost:3001/auth/login`, input)
-      if (res?.data) {
-        props.setAppState(res.data)
-        setLoading(false)
-        navigate("/")
-      } else {
-        setErrors((e) => ({ ...e, input: "Invalid username/password combination" }))
-        setLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
-      const message = err?.response?.data?.error?.message
-      setErrors((e) => ({ ...e, input: message ? String(message) : String(err) }))
-      setLoading(false)
+    const {data, error} = await apiClient.loginUser({email: form.email, password: form.password})
+    if (error) setErrors((e) => ({ ...e, form: error }))
+    if (data?.user) {
+      setUser(data.user)
+      apiClient.setToken(data.token)
     }
+
+    setIsProcessing(false)
   }
 
   return (
@@ -55,9 +50,9 @@ function LoginForm(props) {
         <input
           type="email"
           name="email"
-          placeholder="Nas@gmail.com"
-          value={input.email}
-          onChange={handler}
+          placeholder="Nasradin@gmail.com"
+          value={form.email}
+          onChange={handleOnInputChange}
         />
         {errors.email && <span className="error">{errors.email}</span>}
       </div>
@@ -68,13 +63,14 @@ function LoginForm(props) {
           type="password"
           name="password"
           placeholder="Password"
-          value={input.password}
-          onChange={handler}
+          value={form.password}
+          onChange={handleOnInputChange}
         />
         {errors.password && <span className="error">{errors.password}</span>}
       </div>
 
-      <button className="submit-login" disabled={loading} onClick={handleOnSubmit}>{loading ? "loading..." : "Login"}</button>
+      <button className="submit-login" disabled={isProcessing} onClick={handleOnSubmit}>{isProcessing ? "loading..." : "Login"}</button>
+
       <div className="footer">
         <p>
           Don't have an account? Sign up <Link className="footer-here" to="/register" path="register">here</Link>
@@ -83,5 +79,6 @@ function LoginForm(props) {
     </div>
   );
 }
+
 
 export default LoginForm;

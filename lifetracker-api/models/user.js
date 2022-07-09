@@ -37,7 +37,7 @@ class User {
     }
 
     static async register (credentials) {
-        const requireFields = ["email", "username", "first_name", "last_name", "password", "confirmPassword"]
+        const requireFields = ["email", "userName", "firstName", "lastName", "password"]
         requireFields.forEach((field) => {
             if (!credentials?.hasOwnProperty(field)) {
                 throw new BadRequestError(`Missing ${field} in request body`)
@@ -64,7 +64,7 @@ class User {
             )
             VALUES ($1, $2, $3, $4, $5)
             RETURNING id, email, username, first_name, last_name, updated_at, created_at;
-        `, [lowercasedEmail, hashedPassword, credentials.username, credentials.first_name, credentials.last_name])
+        `, [lowercasedEmail, hashedPassword, credentials.userName, credentials.firstName, credentials.lastName])
 
         const user = result.rows[0]
 

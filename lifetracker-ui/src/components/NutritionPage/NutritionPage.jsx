@@ -1,37 +1,24 @@
-import * as React from "react"
-import { useNavigate, Link } from "react-router-dom"
+import NotFound from "components/NotFound/NotFound";
+import NutritionDetail from "components/NutritionDetail/NutritionDetail";
+import NutritionNew from "components/NutritionNew/NutritionNew";
+import NutritionOverview from "components/NutritionOverview/NutritionOverview";
+import {Routes, Route} from "react-router-dom";
+import { useState } from "react";
 import "./NutritionPage.css"
-import AccessForbidden from "../AccessForbidden/AccessForbidden"
 
-export default function NutritionPage({ user, setAppState }) {
-    const navigate = useNavigate()
-    const isAuthenticated = Boolean(user?.email)
+function NutritionPage(props) {
+    const [fruit, setFruit] = useState([])
 
-    const handleOnLogout = () => {
-        setAppState({})
-        navigate("/")
-    }
-    const button = isAuthenticated ? (
-        <button className="btn primary" onClick={handleOnLogout}>
-          Logout
-        </button>
-      ) : (
-        <Link to="/login">
-          <button className="btn primary">Login</button>
-        </Link>
-      )
-    if (isAuthenticated) {
-        return (
-            <div className="nutrition-page">
-                <div className="footer">{button}</div>
-                Nutrition Page
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                <AccessForbidden setAppState={setAppState}/>
-            </div>
-        )
-    }
-}
+    return (
+      <div className="nutrition-page">
+            <Routes>
+                <Route path="/" element={<NutritionOverview fruit={fruit}/>}></Route>
+                <Route path="/create" element={<NutritionNew fruit={fruit} setFruit={setFruit}/>}></Route>
+                <Route path="/id/:nutritionId" element={<NutritionDetail />}></Route>
+                <Route path="*" element={<NotFound/>}></Route>
+            </Routes>
+      </div>
+    )
+  }
+
+  export default NutritionPage;
