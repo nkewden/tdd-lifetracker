@@ -2,9 +2,9 @@
 
 ## Overview
 
-## FrontEnd Link
+#Submitted By: Nasradin Kewden
 
-https://nasradin-lifetracker-app.surge.sh/
+#Deployed Application: https://nasradin-lifetracker-app.surge.sh/
 
 > Data is the new oil - Clive Humbly
 
@@ -22,16 +22,17 @@ This application will be built using the battle-tested PERN stack - PostgreSQL, 
 - [x] Employ useEffect and useState hooks to manage application state on the frontend
 
 
+## Week 5 - Part 2
+
+
+https://user-images.githubusercontent.com/99931474/178340090-bf5d6e40-76ab-4a36-a248-662f0101f980.mp4
+
+
 
 ## Week 4 - Part 1
 
 
 https://user-images.githubusercontent.com/99931474/176976617-ce74880a-b127-484b-9e3a-82cf5a4152db.mp4
-
-## Week 5 - Part 2
-
-
-https://user-images.githubusercontent.com/99931474/178084292-50c032ed-4e03-4675-80d1-d990d95d18eb.mp4
 
 
 ## Application Features
