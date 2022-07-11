@@ -815,13 +815,13 @@ Here are the pieces of functionality that should be built out for the backend:
 
   Reflection
 Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
-[Add your response here]
+[The topics in the labs helped me prepare for this project by a lot. Specifically the database syntax and the user authentication]
 
 If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
-[Add your response here]
+[I mainly focused on doing the main concepts instead of styling. If I had more time, I would spend time to polish my CSS in my project.]
 
 Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
-[Add your response here]
+[During the demo, some of my peers added the exercise and sleep pages and I would've like to add those features to my project]
 
 ## Wrapping Up and Resources
 
