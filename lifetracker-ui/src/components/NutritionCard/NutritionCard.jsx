@@ -13,7 +13,7 @@ export default function NutritionCard(props) {
         <p className="nutrition-calories">Calories: {props.calories}</p>
         <p className="nutrition-category ">Category: {props.category}</p>
         <p className="nutrition-quantity">Quantity: {props.quantity}</p>
-        <p className="nutrition-quantity">Quantity: {props.created_at}</p>
+        {/* <p className="nutrition-quantity">Quantity: {props.created_at}</p> */}
         </div>
     </div>
   )

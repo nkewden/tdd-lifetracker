@@ -19,7 +19,6 @@ function ActivityFeed({totalCaloriesPerDay, avgCaloriesPerCategory}) {
     }
     }
 
-    console.log(16, activity)
 
     let totalStat = {}
 
