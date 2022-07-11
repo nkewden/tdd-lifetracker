@@ -61,7 +61,7 @@ function App() {
             <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />
             <Route path="/register" element={<RegistrationPage user={user} setUser={setUser}/>} />
             <Route path="/activity" element={user?.email ? (<ActivityPage/>) : (<AccessForbidden/>)}/>
-            <Route path="/nutrition/" element={user?.email ? (<NutritionPage user={user}/>) : (<AccessForbidden/>)}/>
+            <Route path="/nutrition/*" element={user?.email ? (<NutritionPage user={user}/>) : (<AccessForbidden/>)}/>
             <Route path="/nutrition/create" element={<NutritionForm user={user} setUser={setUser}/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
