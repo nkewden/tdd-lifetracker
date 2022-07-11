@@ -2,9 +2,9 @@
 
 ## Overview
 
-#Submitted By: Nasradin Kewden
+##Submitted By: Nasradin Kewden
 
-#Deployed Application: https://nasradin-lifetracker-app.surge.sh/
+##Deployed Application: https://nasradin-lifetracker-app.surge.sh/
 
 > Data is the new oil - Clive Humbly
 
