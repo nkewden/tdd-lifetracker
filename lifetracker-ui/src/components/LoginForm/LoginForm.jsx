@@ -3,8 +3,10 @@ import "./LoginForm.css";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom"
 import apiClient from "../../services/apiClient"
+import {useAuthContext} from "../../contexts/auth"
 
-function LoginForm({ user, setUser }) {
+function LoginForm() {
+  const { user, setUser } = useAuthContext()
   const navigate = useNavigate()
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({ email: "", password: "" });

@@ -13,8 +13,6 @@ class Nutrition {
 
 
         const user_id = await User.fetchUserByEmail(user.email)
-
-
         
         const result = await db.query(
             

@@ -12,47 +12,50 @@ import Navbar from "../Navbar/Navbar"
 import apiClient from "../../services/apiClient";
 import AccessForbidden from "../AccessForbidden/AccessForbidden";
 import NutritionForm from "../NutritionForm/NutritionForm";
-// import {authContextProver, useAuthContext} from "../../contexts/auth"
+import {AuthContextProvider, useAuthContext} from "../../contexts/auth"
+import {ActivityContextProvider} from "../../contexts/activity"
 
-// export default function AppContainer() {
-//   return (
-//     <AuthContextProvider>
-//         <App />
-//     </AuthContextProvider>
-//   )
-// }
+export default function AppContainer() {
+  return (
+    <AuthContextProvider>
+      <ActivityContextProvider>
+        <App />
+      </ActivityContextProvider>
+    </AuthContextProvider>
+  )
+}
 
 
-export default function App() {
-  const [user, setUser] = useState({})
-  const [error, setError] = useState()
+function App() {
+  const {user, setUser} = useAuthContext()
+  // const [error, setError] = useState()
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data, err } = await apiClient.fetchUserFromToken()
-      if (data) setUser(data.user)
-      if(error) setError(err)
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const { data, err } = await apiClient.fetchUserFromToken()
+  //     if (data) setUser(data.user)
+  //     if(error) setError(err)
 
-    }
+  //   }
 
-    const token = localStorage.getItem("lifetracker_token")
-    if (token) {
-      apiClient.setToken(token)
-      fetchUser()
-    }
-  }, [])
+  //   const token = localStorage.getItem("lifetracker_token")
+  //   if (token) {
+  //     apiClient.setToken(token)
+  //     fetchUser()
+  //   }
+  // }, [])
 
-  const handleLogout = async () => {
-    await apiClient.logoutUser()
-    setUser({})
-    setError(null)
-  }
+  // const handleLogout = async () => {
+  //   await apiClient.logoutUser()
+  //   setUser({})
+  //   setError(null)
+  // }
 
   return (
     <div className="app">
       <React.Fragment>
         <BrowserRouter>
-        <Navbar user={user} setUser={setUser} handleLogout={handleLogout}/>
+        <Navbar user={user} setUser={setUser} />
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage user={user} setUser={setUser}/>} />

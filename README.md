@@ -8,6 +8,17 @@ Everywhere around us is data waiting to be collected and utilized. In recent yea
 
 This application will be built using the battle-tested PERN stack - PostgreSQL, Express, React, and Node.
 
+- [x] Develop a full-fledged authentication system using PostgreSQL and Bcrypt
+- [x] Provide users with an Express API they can interact with to store user-related activity
+- [x] Construct multiple Models that implement the core business logic associated with tracking users' lives
+- [x] Write SQL queries that aggregate user statistics and provide summary overviews about their activity
+- [x] Design a React frontend that interacts with the API using an API service class
+- [x] Build multiple pages and forms that communicate with the server using HTTP requests
+- [x] Store user-authenticated JWT tokens in the browser's local storage for persisted authentication
+- [x] Employ useEffect and useState hooks to manage application state on the frontend
+
+
+
 ## Week 4 - Part 1
 
 
@@ -17,27 +28,6 @@ https://user-images.githubusercontent.com/99931474/176976617-ce74880a-b127-484b-
 
 
 https://user-images.githubusercontent.com/99931474/178084292-50c032ed-4e03-4675-80d1-d990d95d18eb.mp4
-
-
-## Goals
-
-- [x] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
-  - [x] If the user is logged in, it should display a **Sign Out** button. 
-  - [x] If no user is logged in, it should display **Login** and **Register** buttons
-  - [x] Display a logo on the far left side, and contain links to the individual detailed activity page. 
-- [x] **The Landing Page:** Display a large hero image and a brief blurb on what this application is about
-- [x] **Login Page:** A form that allows users to login with email and password.
-- [x] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
-- [x] When a user first authenticates, they should be redirected to an authenticated view (i.e the detailed activity page). When they sign out, all frontend data should be reset.
-- [ ] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
-- [x] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves. 
-- [x] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
-- [ ] Deployed website with Heroku & Surge. 
-
-**Detailed Activity Page:**
-- [ ] The detailed activity page should display a feed of all previous tracked activities.
-- [ ] The detailed activity should contain a form to contain relevant information. (i.e if tracking nutrition this form allows the user to capture calories, timestamp, image, category, etc.) 
-- [x] The activity tracked should be given a unique id for easy lookup.
 
 
 ## Application Features
@@ -156,33 +146,33 @@ The components in the `App.jsx` file should render the following components (alo
       - [x] Add a `fetchUserFromToken` method that uses the `request` method to send an HTTP request to the `auth/me` endpoint
       - [x] **Add as many other methods as needed when making API requests**
 
-  - [ ] Create an **`auth`** context:
+  - [x] Create an **`auth`** context:
 
-    - [ ] First, create a `contexts` directory at the root of the project
-    - [ ] Inside it, touch the `contexts/auth.jsx` file
-    - [ ] In that file, define a new `AuthContext` with `React.createContext`
-    - [ ] Use that context to create an `AuthContextProvider` component
-      - [ ] The Provider component should create state variables and updaters needed for `user`, `initialized`, `isProcessing`, and `error`.
-      - [ ] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
-        - [ ] That hook should check to see if a JWT token exists in local storage under the `lifetracker_token` key
-          - [ ] If it does:
-            - [ ] It should add that token to `ApiClient` class with the `setToken` method
-            - [ ] Then, it should set the `isProcessing` state variable to `true` and the `error` state variable to `null`
-            - [ ] Next, it should send a `GET` request to the `/auth/me` endpoint
-              - [ ] If it fails, it should set the `error` prop to a valid error message
-              - [ ] If it is successful...
-                - [ ] It should set the `user` state variable with the `user` returned in the response
-                - [ ] It should set the `error` state variable to `null`
-            - [ ] Regardless, it should set the `isProcessing` state variable to `false` and the `initialized` state variable to `true`
-          - [ ] The user returned from that request should be stored in state. This will ensure that users stay logged in even if they refresh the page.
+    - [x] First, create a `contexts` directory at the root of the project
+    - [x] Inside it, touch the `contexts/auth.jsx` file
+    - [x] In that file, define a new `AuthContext` with `React.createContext`
+    - [x] Use that context to create an `AuthContextProvider` component
+      - [x] The Provider component should create state variables and updaters needed for `user`, `initialized`, `isProcessing`, and `error`.
+      - [x] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
+        - [x] That hook should check to see if a JWT token exists in local storage under the `lifetracker_token` key
+          - [x] If it does:
+            - [x] It should add that token to `ApiClient` class with the `setToken` method
+            - [x] Then, it should set the `isProcessing` state variable to `true` and the `error` state variable to `null`
+            - [x] Next, it should send a `GET` request to the `/auth/me` endpoint
+              - [x] If it fails, it should set the `error` prop to a valid error message
+              - [x] If it is successful...
+                - [x] It should set the `user` state variable with the `user` returned in the response
+                - [x] It should set the `error` state variable to `null`
+            - [x] Regardless, it should set the `isProcessing` state variable to `false` and the `initialized` state variable to `true`
+          - [x] The user returned from that request should be stored in state. This will ensure that users stay logged in even if they refresh the page.
       - [ ] It should also define handler functions for:
-        - [ ] `loginUser` - should make a request to log the user in
-        - [ ] `signupUser` - should make a request to sign the user up
-        - [ ] `fetchUserFromToken` - should make a request to the `/auth/me` route to get the user's infos
-        - [ ] `logoutUser` - this function should remove the `lifetracker_token` from local storage and refresh the page so that all user data is reset
-      - [ ] Make sure to set all the state variables as the `value` prop passed to the `AuthContext.Provider` component
-    - [ ] Create and export a `useAuthContext` hook that calls the `React.useContext` hook with the newly created `AuthContext` and returns it.
-    - [ ] In `App.jsx` file create an `AppContainer` component that wraps the `App` component with the `AuthContextProvider` component (which should still be nested inside the `BrowserRouter` component from `react-router-dom`). Export the `AppContainer` component by default instead of the `App`
+        - [x] `loginUser` - should make a request to log the user in
+        - [x] `signupUser` - should make a request to sign the user up
+        - [x] `fetchUserFromToken` - should make a request to the `/auth/me` route to get the user's infos
+        - [x] `logoutUser` - this function should remove the `lifetracker_token` from local storage and refresh the page so that all user data is reset
+      - [x] Make sure to set all the state variables as the `value` prop passed to the `AuthContext.Provider` component
+    - [x] Create and export a `useAuthContext` hook that calls the `React.useContext` hook with the newly created `AuthContext` and returns it.
+    - [x] In `App.jsx` file create an `AppContainer` component that wraps the `App` component with the `AuthContextProvider` component (which should still be nested inside the `BrowserRouter` component from `react-router-dom`). Export the `AppContainer` component by default instead of the `App`
 
   - [x] The **`Loading.jsx`** component
 
@@ -282,81 +272,81 @@ The components in the `App.jsx` file should render the following components (alo
 
   - [x] The **`activity`** context
 
-    - [ ] Create a file in the `contexts directory - `/contexts/activity.jsx`
-    - [ ] In that file, define a new `ActivityContext` with `React.createContext`
-    - [ ] Use that context to create an `ActivityContextProvider` component
-      - [ ] The `ActivityContextProvider` component should create state variables and updaters needed for `activity`, `initialized`, `isLoading`, and `error`.
-      - [ ] It should call the `useAuthContext` hook and check to see if a valid user is logged in.
-      - [ ] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
-        - [ ] That hook should check to see if a user is logged in.
-        - [ ] If a user is logged in...
-          - [ ] Set the `isLoading` state variable to `true` and the `error` state variable to `null`
-          - [ ] Then, it should make a `GET` request to the `/activity` endpoint
-            - [ ] If there is an error with the request, it should set a message as the `error` state variable
-            - [ ] If all goes well...
-              - [ ] It should set the data as the `activity` state variable
-              - [ ] It should set the `error` state variable to `null`
-          - [ ] Regardless, at the end, set the `isLoading` state variable to `false` and the `initialized` state variable to `true`
-      - [ ] Make sure to pass an object containing all the state variables to the `value` prop of the `ActivityContext.Provider` component
-    - [ ] Create and export a `useActivityContext` hook that calls the `React.useContext` hook with the newly created `ActivityContext` and returns it.
-    - [ ] In the `App.jsx` file, nest the `ActivityContextProvider` inside the `AuthContextProvider`.
+    - [x] Create a file in the `contexts directory - `/contexts/activity.jsx`
+    - [x] In that file, define a new `ActivityContext` with `React.createContext`
+    - [x] Use that context to create an `ActivityContextProvider` component
+      - [x] The `ActivityContextProvider` component should create state variables and updaters needed for `activity`, `initialized`, `isLoading`, and `error`.
+      - [x] It should call the `useAuthContext` hook and check to see if a valid user is logged in.
+      - [x] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
+        - [x] That hook should check to see if a user is logged in.
+        - [x] If a user is logged in...
+          - [x] Set the `isLoading` state variable to `true` and the `error` state variable to `null`
+          - [x] Then, it should make a `GET` request to the `/activity` endpoint
+            - [x] If there is an error with the request, it should set a message as the `error` state variable
+            - [x] If all goes well...
+              - [x] It should set the data as the `activity` state variable
+              - [x] It should set the `error` state variable to `null`
+          - [x] Regardless, at the end, set the `isLoading` state variable to `false` and the `initialized` state variable to `true`
+      - [x] Make sure to pass an object containing all the state variables to the `value` prop of the `ActivityContext.Provider` component
+    - [x] Create and export a `useActivityContext` hook that calls the `React.useContext` hook with the newly created `ActivityContext` and returns it.
+    - [x] In the `App.jsx` file, nest the `ActivityContextProvider` inside the `AuthContextProvider`.
 
   - [x] The **`ActivityPage.jsx`** component:
 
     - [x] Should render JSX that is wrapped by an element with the `className` of `activity-page`
-    - [ ] It should call the `useActivityContext` hook and extract all the necessary data from it.
-    - [ ] If the `isProcessing` flag is `true`, it should render the `Loading.jsx` component
-    - [ ] If the `isProcessing` flag is `false`, it should render the `ActivityFeed.jsx` component and pass it the appropriate props
+    - [x] It should call the `useActivityContext` hook and extract all the necessary data from it.
+    - [x] If the `isProcessing` flag is `true`, it should render the `Loading.jsx` component
+    - [x] If the `isProcessing` flag is `false`, it should render the `ActivityFeed.jsx` component and pass it the appropriate props
 
-  - [ ] The **`ActivityFeed.jsx`** component:
+  - [x] The **`ActivityFeed.jsx`** component:
 
-    - [ ] Should render JSX that is wrapped by an element with the `className` of `activity-feed`
-    - [ ] Should accept **at least** the following props:
-      - [ ] `totalCaloriesPerDay` - an array of items containing summary data about the total calories consumed per day
-      - [ ] `avgCaloriesPerCategory` - an array of items containing summary data about the average calories consumed per category
-      - [ ] Any other
-    - [ ] Inside an element with the `className` of `per-category`, it should:
-      - [ ] Render the text: `"Average Calories Per Category` inside an `h4` element
-      - [ ] Take the first `6` or less items in the `avgCaloriesPerCategory` array and render a `SummaryStat.jsx` component for each item.
-        - [ ] It should pass the calories **rounded down to one decimal place** as the `stat` prop
-        - [ ] It should pass the string of `calories` as the `label` prop
-        - [ ] It should pass the `category` as the `substat` prop
-    - [ ] Inside an element with the `className` of `per-day`, it should:
-      - [ ] Render the text: `"Total Calories Per Day` inside an `h4` element
-      - [ ] For each item in the `totalCaloriesPerDay` array, it should render a `SummaryStat.jsx` component.
-        - [ ] It should pass the calories **rounded down to the nearest whole number** as the `stat` prop
-        - [ ] It should pass the string of `calories` as the `label` prop
-        - [ ] It should pass the `date` in the format `dd/mm/yyyy` - example: `07/02/2022` - as the `substat` prop
+    - [x] Should render JSX that is wrapped by an element with the `className` of `activity-feed`
+    - [x] Should accept **at least** the following props:
+      - [x] `totalCaloriesPerDay` - an array of items containing summary data about the total calories consumed per day
+      - [x] `avgCaloriesPerCategory` - an array of items containing summary data about the average calories consumed per category
+      - [x] Any other
+    - [x] Inside an element with the `className` of `per-category`, it should:
+      - [x] Render the text: `"Average Calories Per Category` inside an `h4` element
+      - [x] Take the first `6` or less items in the `avgCaloriesPerCategory` array and render a `SummaryStat.jsx` component for each item.
+        - [x] It should pass the calories **rounded down to one decimal place** as the `stat` prop
+        - [x] It should pass the string of `calories` as the `label` prop
+        - [x] It should pass the `category` as the `substat` prop
+    - [x] Inside an element with the `className` of `per-day`, it should:
+      - [x] Render the text: `"Total Calories Per Day` inside an `h4` element
+      - [x] For each item in the `totalCaloriesPerDay` array, it should render a `SummaryStat.jsx` component.
+        - [x] It should pass the calories **rounded down to the nearest whole number** as the `stat` prop
+        - [x] It should pass the string of `calories` as the `label` prop
+        - [x] It should pass the `date` in the format `dd/mm/yyyy` - example: `07/02/2022` - as the `substat` prop
 
-  - [ ] The **`SummaryStat.jsx`** component:
+  - [x] The **`SummaryStat.jsx`** component:
 
-    - [ ] Should render JSX that is wrapped by an element with the `className` of `summary-stat`
-    - [ ] Should accept **at least** the following props:
-      - [ ] `stat` - the primary statistic to display
-      - [ ] `label` - the unit label assigned to the statistic
-      - [ ] `substat` - a secondary statistic related to the primary statistic
-    - [ ] It should render the `stat` prop inside an element with the `className` of `primary-statistic`
-    - [ ] It should render the `label` prop inside an element with the `className` of `stat-label`
-    - [ ] It should render the `substat` prop inside an element with the `className` of `secondary-statistic`
+    - [x] Should render JSX that is wrapped by an element with the `className` of `summary-stat`
+    - [x] Should accept **at least** the following props:
+      - [x] `stat` - the primary statistic to display
+      - [x] `label` - the unit label assigned to the statistic
+      - [x] `substat` - a secondary statistic related to the primary statistic
+    - [x] It should render the `stat` prop inside an element with the `className` of `primary-statistic`
+    - [x] It should render the `label` prop inside an element with the `className` of `stat-label`
+    - [x] It should render the `substat` prop inside an element with the `className` of `secondary-statistic`
 
-  - [ ] The **`nutrition`** context
+  - [x] The **`nutrition`** context
 
-    - [ ] Create a file in the `contexts directory - `/contexts/nutrition.jsx`
-    - [ ] In that file, define a new `NutritionContext` with `React.createContext`
-    - [ ] Use that context to create a `NutritionContextProvider` component
-      - [ ] The `NutritionContextProvider` component should create state variables and updaters needed for `nutritions`, `initialized`, `isLoading`, and `error`.
-      - [ ] It should call the `useAuthContext` hook and check to see if a valid user is logged in.
-      - [ ] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
-        - [ ] That hook should check to see if a user is logged in.
-        - [ ] If a user is logged in...
-          - [ ] Set the `isLoading` state variable to `true`
-          - [ ] Then, it should make a `GET` request to the `/nutritions` endpoint
-            - [ ] If there is an error with the request, it should set a message as the `error` state variable
-            - [ ] If all goes well:
-              - [ ] It should set the data as the `nutritions` state variable
-          - [ ] Regardless, at the end, set the `isLoading` state variable to `false` and the `initialized` state variable to `true`
-      - [ ] Make sure to pass an object containing all the state variables to the `value` prop of the `NutritionContext.Provider` component
-    - [ ] Create and export a `useNutritionContext` hook that calls the `React.useContext` hook with the newly created `NutritionContext` and returns it.
+    - [x] Create a file in the `contexts directory - `/contexts/nutrition.jsx`
+    - [x] In that file, define a new `NutritionContext` with `React.createContext`
+    - [x] Use that context to create a `NutritionContextProvider` component
+      - [x] The `NutritionContextProvider` component should create state variables and updaters needed for `nutritions`, `initialized`, `isLoading`, and `error`.
+      - [x] It should call the `useAuthContext` hook and check to see if a valid user is logged in.
+      - [x] It should have a `React.useEffect` hook that fires when the component is mounted to the screen
+        - [x] That hook should check to see if a user is logged in.
+        - [x] If a user is logged in...
+          - [x] Set the `isLoading` state variable to `true`
+          - [x] Then, it should make a `GET` request to the `/nutritions` endpoint
+            - [x] If there is an error with the request, it should set a message as the `error` state variable
+            - [x] If all goes well:
+              - [x] It should set the data as the `nutritions` state variable
+          - [x] Regardless, at the end, set the `isLoading` state variable to `false` and the `initialized` state variable to `true`
+      - [x] Make sure to pass an object containing all the state variables to the `value` prop of the `NutritionContext.Provider` component
+    - [x] Create and export a `useNutritionContext` hook that calls the `React.useContext` hook with the newly created `NutritionContext` and returns it.
 
   - [x] The **`NutritionPage.jsx`** component:
 
@@ -445,13 +435,13 @@ The components in the `App.jsx` file should render the following components (alo
 
     - [ ] Choose whatever resources you want!
 
-  - [ ] The **`ProtectedRoute.jsx`** component:
-    - [ ] Create a `ProtectedRoute.jsx` component that uses the `useAuthContext` hook to get access to the `initialized` and `user` variables.
-    - [ ] It should accept a component as the `element` prop and render that component.
-    - [ ] If the application isn't currently loading and no user is found, it should render the `LoginPage.jsx` component instead of rendering the route the user intended to go to. This way, we can ensure that only authenticated users can access the provided component.
-    - [ ] Any unauthenticated user should be shown the `LoginPage.jsx` component with a message indicating that they need to authenticate first
-    - [ ] Update the `LoginPage.jsx` component so that it accepts a `message` prop that is displayed in the login form - if it exists.
-    - [ ] Make sure to protect the entire `ActivityPage` component route and the `NutritionPage` component route (along with any other private resource pages). Don't protect the `LandingPage` component or the `LoginPage` and `RegistrationPage` components, as they should be public.
+  - [x] The **`ProtectedRoute.jsx`** component:
+    - [x] Create a `ProtectedRoute.jsx` component that uses the `useAuthContext` hook to get access to the `initialized` and `user` variables.
+    - [x] It should accept a component as the `element` prop and render that component.
+    - [x] If the application isn't currently loading and no user is found, it should render the `LoginPage.jsx` component instead of rendering the route the user intended to go to. This way, we can ensure that only authenticated users can access the provided component.
+    - [x] Any unauthenticated user should be shown the `LoginPage.jsx` component with a message indicating that they need to authenticate first
+    - [x] Update the `LoginPage.jsx` component so that it accepts a `message` prop that is displayed in the login form - if it exists.
+    - [x] Make sure to protect the entire `ActivityPage` component route and the `NutritionPage` component route (along with any other private resource pages). Don't protect the `LandingPage` component or the `LoginPage` and `RegistrationPage` components, as they should be public.
 
 ### API
 
@@ -673,10 +663,10 @@ Here are the pieces of functionality that should be built out for the backend:
   - [x] Commit all work to `git`
   - [x] There should now be a full-fledged authentication system in place!
 - **Resources and Permissions**
-  - [ ] Next, implement the functionality to allow users to save instances of things they've drank/eaten, so that they can track their own nutrition data! Also make sure users can only access the data that they themselves have created. No other user should be able to see any data owned by another user!
-  - [ ] The **Nutrition** model
-    - [ ] In the `models` directory, create two new files: `models/nutrition.js` and `models/nutrition.test.js`
-      - [ ] The `Nutrition` model should have **at least** the following static methods:
+  - [x] Next, implement the functionality to allow users to save instances of things they've drank/eaten, so that they can track their own nutrition data! Also make sure users can only access the data that they themselves have created. No other user should be able to see any data owned by another user!
+  - [x] The **Nutrition** model
+    - [x] In the `models` directory, create two new files: `models/nutrition.js` and `models/nutrition.test.js`
+      - [x] The `Nutrition` model should have **at least** the following static methods:
         - [x] `createNutrition`
           - [x] Should insert a new nutrition instance into the database when values are supplied for all of the required fields: `"name"`, `"category"`, `"calories"`, and `"image_url"`. The `quantity` field should default to `1`.
           - [x] The new nutrition instance should have its `user_id` field set to the `id` of the authenticated user
@@ -686,21 +676,21 @@ Here are the pieces of functionality that should be built out for the backend:
           - [x] If no nutrition instance matches that `id`, throws a `NotFoundError` (`404` status code)
         - [x] `listNutritionForUser`
           - [x] Should list all nutrition instances in the database that are owned by a particular user
-    - [ ] In the `models/nutrition.test.js` file:
-      - [ ] Test the `createNutrition` method. Write test cases for:
-        - [ ] A user can create a nutrition instance when they supply the appropriate values
-        - [ ] The appropriate error is thrown when any of the provided errors are invalid
-        - [ ] The user that creates the nutrition instance now owns that nutrition instance
-      - [ ] Test the `fetchNutritionById` method. Write test cases for:
-        - [ ] Fetches the nutrition instance that matches the supplied `id`
-        - [ ] Throws a `NotFoundError` when no nutrition instances matches the supplied `id`
-      - [ ] Test the `listNutritionForUser` method. Write test cases for:
-        - [ ] Fetches all nutrition instances belonging to a particular user
-        - [ ] Doesn't include any nutrition instances belonging to a different user
-        - [ ] Returns an empty array if no nutrition instances are found in the database that belong to that user
-    - [ ] In the `models/nutrition.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-    - [ ] Commit all work to `git`
+    - [x] In the `models/nutrition.test.js` file:
+      - [x] Test the `createNutrition` method. Write test cases for:
+        - [x] A user can create a nutrition instance when they supply the appropriate values
+        - [x] The appropriate error is thrown when any of the provided errors are invalid
+        - [x] The user that creates the nutrition instance now owns that nutrition instance
+      - [x] Test the `fetchNutritionById` method. Write test cases for:
+        - [x] Fetches the nutrition instance that matches the supplied `id`
+        - [x] Throws a `NotFoundError` when no nutrition instances matches the supplied `id`
+      - [x] Test the `listNutritionForUser` method. Write test cases for:
+        - [x] Fetches all nutrition instances belonging to a particular user
+        - [x] Doesn't include any nutrition instances belonging to a different user
+        - [x] Returns an empty array if no nutrition instances are found in the database that belong to that user
+    - [x] In the `models/nutrition.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+    - [x] Commit all work to `git`
   - [x] The **permissions** middleware
     - [x] In the `middleware` directory, create two new files: `middleware/permissions.js` and `middleware/permissions.test.js`
       - [x] Though more functions will need to be added here as the number of resources grows, for now only 1 function needs to be created.
@@ -711,19 +701,19 @@ Here are the pieces of functionality that should be built out for the backend:
         - [x] Check that it is owned by the authenticated user
           - [x] If it doesn't, it should throw a `ForbiddenError` (`403` status code)
           - [x] If the nutrition instance does belong to the authed user, it should attach it to the `locals` property of the `response` as its `nutrition` property so that it doesn't need to be fetched again by the database (this isn't required, but is probably a good idea).
-    - [ ] In the `middleware/permissions.test.js` file:
-      - [ ] Test the `authedUserOwnsNutrition` middleware function
-        - [ ] Write test cases for:
-          - [ ] Throws error if authed user doesn't own nutrition
-          - [ ] Throws `NotFoundError` if `id` of nutrition isn't found in database
-          - [ ] Doesn't throw error if authed user is nutrition owner
-          - [ ] (OPTIONAL) Attaches the `nutrition` to the `locals` property of the response when the user owns the nutrition instance
-    - [ ] In the `middleware/permissions.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-    - [ ] Commit all work to `git`
-  - [ ] The **/nutrition** routes
-    - [ ] In the `routes` directory, create two new files: `routes/nutrition.js` and `routes/nutrition.test.js`
-      - [ ] A new Express router should be created that will be mounted at the `/nutrition` endpoint. It should handle:
+    - [x] In the `middleware/permissions.test.js` file:
+      - [x] Test the `authedUserOwnsNutrition` middleware function
+        - [x] Write test cases for:
+          - [x] Throws error if authed user doesn't own nutrition
+          - [x] Throws `NotFoundError` if `id` of nutrition isn't found in database
+          - [x] Doesn't throw error if authed user is nutrition owner
+          - [x] (OPTIONAL) Attaches the `nutrition` to the `locals` property of the response when the user owns the nutrition instance
+    - [x] In the `middleware/permissions.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+    - [x] Commit all work to `git`
+  - [x] The **/nutrition** routes
+    - [x] In the `routes` directory, create two new files: `routes/nutrition.js` and `routes/nutrition.test.js`
+      - [x] A new Express router should be created that will be mounted at the `/nutrition` endpoint. It should handle:
         - [x] `GET` requests to the `/` endpoint
           - [x] It should send a JSON response back to the client with all of the user-owned nutrition instances in an array like so: `{ "nutritions": [...] }`
         - [x] `POST` requests to the `/` endpoint
@@ -731,39 +721,39 @@ Here are the pieces of functionality that should be built out for the backend:
           - [x] It should send a JSON response back to the client with a `201` status code, and the newly created nutrition instance like so: `{ "nutrition": { ... } }`
         - [x] `GET` requests to the `/:nutritionId` endpoint
           - [x] It should send a JSON response back to the client with the nutrition instance that matches the `:nutritionId` parameter like so: `{ "nutrition": { ... } }`
-    - [ ] In the `routes/nutrition.test.js` file:
-      - [ ] Test the `GET /nutrition` endpoint
-        - [ ] Write test cases for:
-          - [ ] Returns an array of all `nutrition` entries belonging to the user
-          - [ ] Other user's entries aren't included in the `nutritions` array
-          - [ ] Throws `UnauthorizedError` if no valid user is logged in
-      - [ ] Test the `POST /nutrition` endpoint
-        - [ ] Write test cases for:
-          - [ ] Authenticated users can create a new `nutrition` entry when providing values for all the required fields
-          - [ ] The new `nutrition` entry belongs to the user that created it
-          - [ ] Throws a `BadRequestError` if any of the required fields are missing
-          - [ ] Throws an `UnauthorizedError` if no valid user is logged in
-      - [ ] Test the `GET /nutrition/:nutritionId` endpoint
-        - [ ] Write test cases for:
-          - [ ] Nutrition owner can fetch a `nutrition` entry when providing a valid `id`
-          - [ ] Throws a `403 ForbiddenError` if a user tries to access a `nutrition` instance that does not belong to them
-          - [ ] Throws a `404 NotFoundError` when the `nutritionId` does not match any nutrition in the database
-          - [ ] Throws a `401 UnauthorizedError` if no valid user is logged in
-    - [ ] In the `routes/nutrition.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-  - [ ] Commit all work to `git`
+    - [x] In the `routes/nutrition.test.js` file:
+      - [x] Test the `GET /nutrition` endpoint
+        - [x] Write test cases for:
+          - [x] Returns an array of all `nutrition` entries belonging to the user
+          - [x] Other user's entries aren't included in the `nutritions` array
+          - [x] Throws `UnauthorizedError` if no valid user is logged in
+      - [x] Test the `POST /nutrition` endpoint
+        - [x] Write test cases for:
+          - [x] Authenticated users can create a new `nutrition` entry when providing values for all the required fields
+          - [x] The new `nutrition` entry belongs to the user that created it
+          - [x] Throws a `BadRequestError` if any of the required fields are missing
+          - [x] Throws an `UnauthorizedError` if no valid user is logged in
+      - [x] Test the `GET /nutrition/:nutritionId` endpoint
+        - [x] Write test cases for:
+          - [x] Nutrition owner can fetch a `nutrition` entry when providing a valid `id`
+          - [x] Throws a `403 ForbiddenError` if a user tries to access a `nutrition` instance that does not belong to them
+          - [x] Throws a `404 NotFoundError` when the `nutritionId` does not match any nutrition in the database
+          - [x] Throws a `401 UnauthorizedError` if no valid user is logged in
+    - [x] In the `routes/nutrition.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+  - [x] Commit all work to `git`
 - **Additional Resources**
   - [ ] Create model and routes files for 1-2 additional resources that your app will track (sleep, exercise, steps, floors climbed, meditation, mood, heartrate, music practice, etc)
   - [ ] Commit all work to `git`
 - **Summary Statistics**
-  - [ ] One of the last features of the API will be a model that calculates summary statistic on the different resources that users are tracking. This includes statistics like average calories per day, or max calories per category. To do that, we'll create a new `Activity` model and an `activity` route that will be used to populate the frontend.
-  - [ ] The **Activity** model
-    - [ ] In the `models` directory, create two new files: `models/Activity.js` and `models/Activity.test.js`
-      - [ ] The `Activity` model should have **at least** the following static methods:
-        - [ ] `calculateDailyCaloriesSummaryStats`
-          - [ ] Should execute a SQL query that calculates **at least** the total calories consumed per day (aliased as `totalCaloriesPerDay`), along with the day (aliased as `date`).
-          - [ ] The query should return a row for **each day** containing the total calories consumed per day, and the average calric content per nutrition entry.
-            - [ ] For instance, here's a set of 7 **simplified** nutrition item entries (actual data will look different):
+  - [x] One of the last features of the API will be a model that calculates summary statistic on the different resources that users are tracking. This includes statistics like average calories per day, or max calories per category. To do that, we'll create a new `Activity` model and an `activity` route that will be used to populate the frontend.
+  - [x] The **Activity** model
+    - [x] In the `models` directory, create two new files: `models/Activity.js` and `models/Activity.test.js`
+      - [x] The `Activity` model should have **at least** the following static methods:
+        - [x] `calculateDailyCaloriesSummaryStats`
+          - [x] Should execute a SQL query that calculates **at least** the total calories consumed per day (aliased as `totalCaloriesPerDay`), along with the day (aliased as `date`).
+          - [x] The query should return a row for **each day** containing the total calories consumed per day, and the average calric content per nutrition entry.
+            - [x] For instance, here's a set of 7 **simplified** nutrition item entries (actual data will look different):
               - 1. `{ id: 1, user_id: 1, calories: 100, category: "candy", created_at: "12-22-2022" }`
               - 2. `{ id: 2, user_id: 1, calories: 200, category: "drink", created_at: "12-22-2022" }`
               - 3. `{ id: 3, user_id: 1, calories: 200, category: "fruit", created_at: "12-23-2022" }`
@@ -775,10 +765,10 @@ Here are the pieces of functionality that should be built out for the backend:
               - 1. `{ date: "12-22-2022", totalCaloriesPerDay: 300 }`
               - 2. `{ date: "12-23-2022", totalCaloriesPerDay: 1000 }`
               - 3. `{ date: "12-24-2022", totalCaloriesPerDay: 800 }`
-        - [ ] `calculatePerCategoryCaloriesSummaryStats`
-          - [ ] Should execute a SQL query that calculates **at least** the average calories consumed per category (aliased as `avgCaloriesPerCategory` and **rounded down to one decimal place**), along with the category (aliased as `category`).
-          - [ ] The query should return a row for **each day** containing the total calories consumed per day, and the average calric content per nutrition entry.
-            - [ ] For instance, here's a set of 7 **simplified** nutrition item entries (actual data will look different):
+        - [x] `calculatePerCategoryCaloriesSummaryStats`
+          - [x] Should execute a SQL query that calculates **at least** the average calories consumed per category (aliased as `avgCaloriesPerCategory` and **rounded down to one decimal place**), along with the category (aliased as `category`).
+          - [x] The query should return a row for **each day** containing the total calories consumed per day, and the average calric content per nutrition entry.
+            - [x] For instance, here's a set of 7 **simplified** nutrition item entries (actual data will look different):
               - 1. `{ id: 1, user_id: 1, calories: 100, category: "candy", created_at: "12-22-2022" }`
               - 2. `{ id: 2, user_id: 1, calories: 200, category: "drink", created_at: "12-22-2022" }`
               - 3. `{ id: 3, user_id: 1, calories: 200, category: "fruit", created_at: "12-23-2022" }`
@@ -786,40 +776,40 @@ Here are the pieces of functionality that should be built out for the backend:
               - 5. `{ id: 5, user_id: 1, calories: 400, category: "drink", created_at: "12-23-2022" }`
               - 6. `{ id: 6, user_id: 1, calories: 700, category: "fruit", created_at: "12-24-2022" }`
               - 7. `{ id: 7, user_id: 1, calories: 100, category: "fruit", created_at: "12-24-2022" }`
-            - [ ] The summary stats returned from the query should look like this:
+            - [x] The summary stats returned from the query should look like this:
               - 1. `{ category: "candy", avgCaloriesPerCategory: 100.0 }`
               - 2. `{ category: "drink", avgCaloriesPerCategory: 300.0 }`
               - 3. `{ category: "fruit", avgCaloriesPerCategory: 266.6 }`
               - 4. `{ category: "dairy", avgCaloriesPerCategory: 400.0 }`
-    - [ ] In the `models/Activity.test.js` file:
-      - [ ] Test the `calculateDailyCaloriesSummaryStats` method. Write test cases for:
-        - [ ] The `calculateDailyCaloriesSummaryStats` method correctly calculates summary statistics per day
-        - [ ] Only uses the `nutrition` entries belonging to the user when calculating summary statistics
-        - [ ] Returns an empty array when the user has no `nutrition` entries
-      - [ ] Test the `calculatePerCategoryCaloriesSummaryStats` method. Write test cases for:
-        - [ ] The `calculatePerCategoryCaloriesSummaryStats` method correctly calculates average calories per category summary statistics
-        - [ ] Only uses the `nutrition` entries belonging to the user when calculating summary statistics
-        - [ ] Returns an empty array when the user has no `nutrition` entries
-    - [ ] In the `models/Activity.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-    - [ ] Commit all work to `git`
-  - [ ] The **/activity** routes
-    - [ ] In the `routes` directory, create two new files: `routes/activity.js` and `routes/activity.test.js`
-      - [ ] A new Express router should be created that will be mounted at the `/activity` endpoint. It should handle:
-        - [ ] `GET` requests to the `/` endpoint
-          - [ ] It should send a JSON response back to the client with summary stats for each resource in the following format:
-            - [ ] `{ "nutrition": { "calories": { "perDay": [...], "perCategory": [...] }, ...anyOtherStats }, ...statsForOtherResources }`
-    - [ ] In the `routes/activity.test.js` file:
-      - [ ] Test the `GET /activity` endpoint
-        - [ ] Write test cases for:
-          - [ ] Provides a JSON response containing arrays of summary stats for resources, attributes, and metrics
-          - [ ] Correctly calculates `totalCaloriesPerDay` for a user's `nutrition` entries
-          - [ ] Correctly calculates `avgCaloriesPerCategory` for a user's `nutrition` entries
-          - [ ] Only returns summary stats based on entries that the currently authenticated user owns
-          - [ ] Throws an `UnauthenticatedError` if no valid user is logged in
-    - [ ] In the `routes/activity.js` file:
-      - [ ] Implement the features outlined in the tests until they're all passing
-  - [ ] Commit all work to `git`
+    - [x] In the `models/Activity.test.js` file:
+      - [x] Test the `calculateDailyCaloriesSummaryStats` method. Write test cases for:
+        - [x] The `calculateDailyCaloriesSummaryStats` method correctly calculates summary statistics per day
+        - [x] Only uses the `nutrition` entries belonging to the user when calculating summary statistics
+        - [x] Returns an empty array when the user has no `nutrition` entries
+      - [x] Test the `calculatePerCategoryCaloriesSummaryStats` method. Write test cases for:
+        - [x] The `calculatePerCategoryCaloriesSummaryStats` method correctly calculates average calories per category summary statistics
+        - [x] Only uses the `nutrition` entries belonging to the user when calculating summary statistics
+        - [x] Returns an empty array when the user has no `nutrition` entries
+    - [x] In the `models/Activity.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+    - [x] Commit all work to `git`
+  - [x] The **/activity** routes
+    - [x] In the `routes` directory, create two new files: `routes/activity.js` and `routes/activity.test.js`
+      - [x] A new Express router should be created that will be mounted at the `/activity` endpoint. It should handle:
+        - [x] `GET` requests to the `/` endpoint
+          - [x] It should send a JSON response back to the client with summary stats for each resource in the following format:
+            - [x] `{ "nutrition": { "calories": { "perDay": [...], "perCategory": [...] }, ...anyOtherStats }, ...statsForOtherResources }`
+    - [x] In the `routes/activity.test.js` file:
+      - [x] Test the `GET /activity` endpoint
+        - [x] Write test cases for:
+          - [x] Provides a JSON response containing arrays of summary stats for resources, attributes, and metrics
+          - [x] Correctly calculates `totalCaloriesPerDay` for a user's `nutrition` entries
+          - [x] Correctly calculates `avgCaloriesPerCategory` for a user's `nutrition` entries
+          - [x] Only returns summary stats based on entries that the currently authenticated user owns
+          - [x] Throws an `UnauthenticatedError` if no valid user is logged in
+    - [x] In the `routes/activity.js` file:
+      - [x] Implement the features outlined in the tests until they're all passing
+  - [x] Commit all work to `git`
 
 
 

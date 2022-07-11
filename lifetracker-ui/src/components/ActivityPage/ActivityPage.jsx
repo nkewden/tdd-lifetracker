@@ -1,12 +1,14 @@
 import * as React from "react"
 import "./ActivityPage.css"
 import ActivityFeed from "../ActivityFeed/ActivityFeed"
+import {useAuthContext} from "../../contexts/auth"
 
-function ActivityPage({ user, setAppState }) {
+function ActivityPage() {
+    const { user } = useAuthContext()
     return (
         <div className="activity-page">
-            <h1></h1>
-            <ActivityFeed/>
+            <h1>Activity</h1>
+            <ActivityFeed user={user} />
         </div>
     )
 }

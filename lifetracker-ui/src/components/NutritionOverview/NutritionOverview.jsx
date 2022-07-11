@@ -5,7 +5,8 @@ import "./NutritionOverview.css"
 export default function NutritionOverview(props) {
   return (
     <div className="nutrition-overview">
-      <Link to="/nutrition/create"><button id="record">Record Nutrition</button></Link>
+      <h1>Nutrition</h1>
+      <Link to="/nutrition/create"><button id="record" className="record-nutrition">Record Nutrition</button></Link>
       <NutritionFeed user={props.user} fruit={props.fruit}></NutritionFeed>
     </div>
   )

@@ -1,9 +1,39 @@
 import React from 'react'
+import SummaryStat from "../SummaryStat/SummaryStat"
+import {useState, useEffect} from "react"
+import apiClient from "../../services/apiClient"
 
-function ActivityFeed() {
-  return (
-    <div></div>
-  )
+function ActivityFeed({totalCaloriesPerDay, avgCaloriesPerCategory}) {
+  const [activity, setActivity] = useState([])
+  const [error, setError] = useState() 
+  const [newActivity, setNewActivity] = useState([])
+
+  async function getActivity(){
+    const {data, err} = await apiClient.fetchActivity()
+    if(err) setError(err)
+    if(data){
+      setNewActivity(data.perCategory)
+      setActivity(data.perDay)
+
+    }
+    }
+
+
+useEffect(() => {
+  getActivity()
+}, []);
+
+return (
+  <div className="nutrition-feed" >
+      {activity.map((item) => {return(
+        <SummaryStat date={item.date} sum={item.sum}/>
+      )})}
+
+  {newActivity.map((item) => {return(
+        <SummaryStat category={item.category} avgCaloriesPerCategory={item.avgCaloriesPerCategory}/>
+      )})}
+  </div>
+)
 }
 
 export default ActivityFeed
