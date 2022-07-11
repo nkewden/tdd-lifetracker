@@ -1,17 +1,9 @@
 .nutrition-card {
-    /* width: 30vw; */
-    background-color:  gray;
+    background-color:bisque;
     text-decoration: none;
-    /* overflow: hidden;
-    height: 40vh;
-    display: flex;
-    border-radius: 20px;
-    border-width: 5px;
-    border-color: #e0e1e0;
-    border-style: groove;
-    color: black;
-    flex-direction: column;
-    position: relative; */
+    
+
+
 }
 
 .nutrition-name {

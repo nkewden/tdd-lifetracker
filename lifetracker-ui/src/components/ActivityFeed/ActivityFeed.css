@@ -1,0 +1,23 @@
+.activity-feed {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 30px;
+    width: 100vw;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-wrapper {
+    margin: 40px;
+    border-style: solid;
+    border-color: black;
+    padding: 10px;
+    background-color: bisque;
+    cursor: pointer;   
+    transition: box-shadow .15s;
+}
+
+.stat-wrapper:hover{
+    box-shadow: 8px 15px 15px rgba(0,0,0,1);
+}

@@ -26,14 +26,14 @@ export const ActivityContextProvider = ({children}) => {
                 setInitialzed(true)
             }
 
-    useEffect(() => {    
+    useEffect( async () => {    
             const token = localStorage.getItem("lifetracker_token")
             if (token && user) {
               apiClient.setToken(token)
               fetchActivity()
             }
 
-    }, [setActivity])
+    }, [])
 
     const values = {fetchActivity, activity, setActivity, initialized, setInitialzed, isLoading, setIsLoading, error, setError}
     return (

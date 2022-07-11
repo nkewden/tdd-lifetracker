@@ -2,6 +2,7 @@ import React from 'react'
 import SummaryStat from "../SummaryStat/SummaryStat"
 import {useState, useEffect} from "react"
 import apiClient from "../../services/apiClient"
+import "./ActivityFeed.css"
 
 function ActivityFeed({totalCaloriesPerDay, avgCaloriesPerCategory}) {
   const [activity, setActivity] = useState([])
@@ -18,19 +19,25 @@ function ActivityFeed({totalCaloriesPerDay, avgCaloriesPerCategory}) {
     }
     }
 
+    console.log(16, activity)
+
+    let totalStat = {}
+
+    if (activity.length > 0){
+      totalStat = {date: activity[activity.length - 1].date, sum: activity[activity.length - 1].sum}
+    }
+
 
 useEffect(() => {
   getActivity()
 }, []);
 
 return (
-  <div className="nutrition-feed" >
-      {activity.map((item) => {return(
-        <SummaryStat date={item.date} sum={item.sum}/>
-      )})}
-
+  <div className="activity-feed" >
   {newActivity.map((item) => {return(
-        <SummaryStat category={item.category} avgCaloriesPerCategory={item.avgCaloriesPerCategory}/>
+    <div className="stat-wrapper">
+      <SummaryStat category={item.category} avgCaloriesPerCategory={item.avgCaloriesPerCategory} date={totalStat.date} sum={totalStat.sum}/>
+    </div>
       )})}
   </div>
 )

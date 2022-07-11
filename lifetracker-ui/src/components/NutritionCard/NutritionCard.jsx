@@ -10,9 +10,10 @@ export default function NutritionCard(props) {
       </div>
         <div className="nutrition-text">
         <p className="nutrition-name">{props.name}</p>
-        <p className="nutrition-calories not-name">Calories: {props.calories}</p>
-        <p className="nutrition-category not-name">Category: {props.category}</p>
-        <p className="nutrition-quantity not-name">Quantity: {props.quantity}</p>
+        <p className="nutrition-calories">Calories: {props.calories}</p>
+        <p className="nutrition-category ">Category: {props.category}</p>
+        <p className="nutrition-quantity">Quantity: {props.quantity}</p>
+        <p className="nutrition-quantity">Quantity: {props.created_at}</p>
         </div>
     </div>
   )

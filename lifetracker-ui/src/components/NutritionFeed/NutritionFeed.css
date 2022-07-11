@@ -1,0 +1,6 @@
+.nutrition-feed{
+    display: grid;
+    padding: 10vw;
+    grid-template-columns: 20vw 20vw 20vw 20vw;
+    column-gap: .8vw;
+}
