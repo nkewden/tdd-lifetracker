@@ -4,7 +4,7 @@
 
 ## FrontEnd Link
 
-https://nasradin-lifetracker.surge.sh/login 
+https://nasradin-lifetracker-app.surge.sh/
 
 > Data is the new oil - Clive Humbly
 
